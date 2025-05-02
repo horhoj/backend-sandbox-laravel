@@ -1,0 +1,46 @@
+services:
+  #nginx
+  nginx:
+    build:
+      context: docker/nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www
+    links:
+      - php_fpm
+
+  #php
+  php_fpm:
+    build:
+      context: docker/php_fpm
+    environment:
+      PHP_IDE_CONFIG: "serverName=Docker"
+    volumes:
+      - ./src:/var/www
+    depends_on:
+      - mysql
+  #database
+  mysql:
+     build:
+       context: docker/mysql
+     volumes:
+       - ./db/:/var/lib/mysql
+     environment:
+       MYSQL_ROOT_PASSWORD: qwerty
+     ports:
+       - 3306:3306
+  #database control
+  phpmyadmin:
+     build:
+       context: docker/phpmyadmin
+     links:
+       - mysql:db
+     ports:
+       - 8081:80
+     environment:
+       MYSQL_ROOT_PASSWORD: qwerty
+     depends_on:
+       - mysql
+
+

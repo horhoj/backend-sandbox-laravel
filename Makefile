@@ -37,6 +37,7 @@ tests:
 	docker compose exec --user $(shell id -u):$(shell id -g)  php_fpm composer test
 
 laravel-install-framework:
+	docker compose exec --user $(shell id -u):$(shell id -g) php_fpm sh -c "rm -f README.md"
 	docker compose exec --user $(shell id -u):$(shell id -g) php_fpm composer create-project --prefer-dist laravel/laravel ./
 	#устанавливаем настройки базы данных
 	sed -i "s/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g" ./src/.env

@@ -8,4 +8,12 @@ PHP, docker(docker-compose), nginx
 
 исключительно через Makefile и команду Make
 
+# отладчик
 
+Для отладки в PHPStorm нужно настроить PHP->servers
+
+name: Docker
+
+host: localhost
+
+use path mapping: project_path/src <===> /var/www

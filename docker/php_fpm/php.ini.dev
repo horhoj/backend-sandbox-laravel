@@ -1,0 +1,7 @@
+max_execution_time = 1111
+max_input_time = 1111
+xdebug.remote_enable=1
+xdebug.mode=debug
+xdebug.start_with_request = yes
+zend_extension=xdebug
+xdebug.discover_client_host=1
